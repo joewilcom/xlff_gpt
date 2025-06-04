@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XLFF Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>XLFF to Human-Readable Converter</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="xlff_file" accept=".xlff,.xlf,.xml,.docx" required>
+        <button type="submit">Convert</button>
+    </form>
+    {% if debug_message %}
+        <div style="color: #c00; margin-top: 1em;">Debug: {{ debug_message }}</div>
+    {% endif %}
+    {% if result %}
+        <h2>Translations</h2>
+        <table>
+            <tr><th>Source</th><th>Target</th></tr>
+            {% for row in result %}
+                <tr>
+                    <td>{{ row.source }}</td>
+                    <td>{{ row.target }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
